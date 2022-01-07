@@ -137,6 +137,10 @@ Examples:
                  new Option<bool>(
                     new[] { "--no-hot-reload" },
                     "Suppress hot reload for supported apps."),
+                 new Option<bool>(
+                    new[] { "--non-interactive" },
+                    "Runs dotnet-watch in non-interative mode. This option is only supported when running with Hot Reload enabled. " +
+                    "Use this option to prevent console input from being captured."),
                  new Option<string>(
                      "--project",
                     "The project to watch"),
@@ -256,6 +260,7 @@ Examples:
             }
 
             var watchOptions = DotNetWatchOptions.Default;
+            watchOptions.NonInteractive = options.NonInteractive;
 
             var fileSetFactory = new MsBuildFileSetFactory(reporter,
                 watchOptions,
